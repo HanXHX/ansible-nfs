@@ -1,0 +1,20 @@
+---
+
+####################################
+# Role configuration
+####################################
+nfs_server: true
+nfs_client: false
+
+####################################
+# Server
+####################################
+nfs_exports: []
+
+####################################
+# Client
+####################################
+nfs_use_client_cache: true
+nfs_cache_path: '/var/cache/fscache'
+nfs_mounts: []
+

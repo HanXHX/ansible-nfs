@@ -1,0 +1,6 @@
+nfs_server: true
+nfs_client: false
+
+nfs_exports:
+  - path: '/srv/nfs1'
+    options: '*(rw,all_squash,anonuid=1000,anongid=1000,sync,no_subtree_check)'

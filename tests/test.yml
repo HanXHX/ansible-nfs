@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+  pre_tasks:
+    - apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+      with_items:
+        - strace
+        - vim
+  roles:
+    - ../../
+
+- hosts: server
+  tasks:
+    - shell: "tr -dc A-Za-z0-9 </dev/urandom | head -c 1024 > {{ nfs_exports[0].path }}/random.txt" 
+      args:
+        creates: "{{ nfs_exports[0].path }}/random.txt"
+
+- hosts: client
+  tasks:
+    - wait_for: >
+        path={{ nfs_mounts[0].localpath }}/random.txt
+        timeout=10
+        state=present
+      changed_when: false

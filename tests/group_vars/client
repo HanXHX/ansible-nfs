@@ -1,0 +1,2 @@
+nfs_server: false
+nfs_client: true

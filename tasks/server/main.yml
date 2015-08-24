@@ -1,0 +1,21 @@
+---
+
+- name: APT | Install NFS server
+  apt: pkg=nfs-kernel-server state=present
+
+- name: SERVICE | Ensure NFS is started
+  service: name=nfs-kernel-server state=started
+
+- name: TEMPLATE | Deploy /etc/exports
+  template: src=../../templates/etc/exports.j2 dest=/etc/exports
+  notify: restart nfs
+
+- name: FILE | Create exports directories
+  file: >
+    path={{ item.path }}
+    owner={{ item.owner | default('root') }}
+    group={{ item.group | default('root') }}
+    mode={{ item.mode | default('0777') }}
+    state=directory
+  with_items: nfs_exports 
+  when: item.creates is not defined or item.creates

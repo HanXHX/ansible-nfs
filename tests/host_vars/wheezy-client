@@ -1,0 +1,6 @@
+nfs_mounts:
+  - localpath: '/srv/clientnfs1'
+    remotepath: '/srv/nfs1'
+    remotehost: '192.168.201.10'
+    options: 'defaults,user,auto,noatime,intr,fsc'
+    enabled: true
