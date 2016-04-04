@@ -6,7 +6,7 @@
 
 - name: FILE | Create local exported directories
   file: path={{ item.localpath }} state=directory
-  with_items: nfs_mounts 
+  with_items: "{{ nfs_mounts }}"
   when: >
     (item.enabled is not defined or item.enabled) and
     (item.creates is not defined or item.creates)
@@ -18,13 +18,13 @@
     src='{{ item.remotehost}}:{{ item.remotepath }}'
     opts={{ item.options | default('defaults') }}
     state={{ 'mounted' if (item.enabled is not defined or item.enabled) else 'unmounted' }}
-  with_items: nfs_mounts
+  with_items: "{{ nfs_mounts }}"
   when: item.deleted is not defined or not item.deleted
   register: m
 
-- name: MOUNT | Remount changed exports 
+- name: MOUNT | Remount changed exports
   command: mount -o remount {{ item.item.localpath }}
-  with_items: m.results
+  with_items: "{{ m.results }}"
   when: item.changed and (item.item.enabled is not defined or item.item.enabled)
 
 - name: MOUNT | Delete mounts
@@ -33,6 +33,5 @@
     fstype=nfs
     src='{{ item.remotehost}}:{{ item.remotepath }}'
     state=absent
-  with_items: nfs_mounts
+  with_items: "{{ nfs_mounts }}"
   when: item.deleted is defined and item.deleted
-

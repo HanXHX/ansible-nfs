@@ -6,8 +6,6 @@
 Vagrant.configure("2") do |config|
 
 	vms = [
-		["wheezy-server", "deb/wheezy-amd64", "192.168.201.10", ["wheezy","server"]],
-		["wheezy-client", "deb/wheezy-amd64", "192.168.201.11", ["wheezy","client"]],
 		["jessie-server", "debian/jessie64", "192.168.201.20", ["jessie", "server"]],
 		["jessie-client", "debian/jessie64", "192.168.201.21", ["jessie","client"]]
 	]

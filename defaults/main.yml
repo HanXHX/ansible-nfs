@@ -3,7 +3,7 @@
 ####################################
 # Role configuration
 ####################################
-nfs_server: true
+nfs_server: false
 nfs_client: false
 
 ####################################

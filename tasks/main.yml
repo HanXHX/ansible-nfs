@@ -1,5 +1,10 @@
 ---
 
+- name: ASSERT | Check vars
+  assert:
+    that:
+      - 'nfs_server or nfs_client'
+
 - name: APT | Install minimal packages
   apt: pkg=nfs-common update_cache=yes cache_valid_time=3600 state=present
 

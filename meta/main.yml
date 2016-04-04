@@ -1,16 +1,18 @@
 ---
 galaxy_info:
   author: Emilien Mantel
-  description: Install and configure NFS server/client on Debian 
+  description: Install and configure NFS server/client on Debian
   company:
   license: GPLv2
-  min_ansible_version: 1.2
+  min_ansible_version: 2.0
   platforms:
   - name: Debian
     versions:
-    - wheezy
     - jessie
-  categories:
+  galaxy_tags:
   - system
+  - nfs
+  - debian
+  - exports
 dependencies: []
- 
+

@@ -6,18 +6,22 @@
       with_items:
         - strace
         - vim
-  roles:
-    - ../../
 
 - hosts: server
-  tasks:
-    - shell: "tr -dc A-Za-z0-9 </dev/urandom | head -c 1024 > {{ nfs_exports[0].path }}/random.txt" 
+  roles:
+    - ../../
+  post_tasks:
+    - name: SHELL | Creates a file on NFS share
+      shell: "tr -dc A-Za-z0-9 </dev/urandom | head -c 1024 > {{ nfs_exports[0].path }}/random.txt"
       args:
         creates: "{{ nfs_exports[0].path }}/random.txt"
 
 - hosts: client
-  tasks:
-    - wait_for: >
+  roles:
+    - ../../
+  post_tasks:
+    - name: WAIT_FOR | Check file on NFS share
+      wait_for: >
         path={{ nfs_mounts[0].localpath }}/random.txt
         timeout=10
         state=present
