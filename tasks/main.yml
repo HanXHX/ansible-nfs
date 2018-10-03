@@ -6,7 +6,11 @@
       - 'nfs_server or nfs_client'
 
 - name: APT | Install minimal packages
-  apt: pkg=nfs-common update_cache=yes cache_valid_time=3600 state=present
+  apt:
+    pkg: nfs-common
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
 
 - name: INCLUDE | Install NFS server
   include: server/main.yml

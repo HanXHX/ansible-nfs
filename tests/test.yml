@@ -2,7 +2,11 @@
 
 - hosts: all
   pre_tasks:
-    - apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+    - apt:
+        pkg: "{{ item }}"
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
       with_items:
         - strace
         - vim
@@ -21,8 +25,8 @@
     - ../../
   post_tasks:
     - name: WAIT_FOR | Check file on NFS share
-      wait_for: >
-        path={{ nfs_mounts[0].localpath }}/random.txt
-        timeout=10
-        state=present
+      wait_for:
+        path: "{{ nfs_mounts[0].localpath }}/random.txt"
+        timeout: 10
+        state: present
       changed_when: false

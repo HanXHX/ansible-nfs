@@ -1,18 +1,22 @@
 ---
 
 - name: APT | Install NFS server
-  apt: pkg=nfs-kernel-server state=present
+  apt:
+    pkg: nfs-kernel-server
+    state: present
 
 - name: TEMPLATE | Deploy /etc/exports
-  template: src=etc/exports.j2 dest=/etc/exports
+  template:
+    src: etc/exports.j2
+    dest: /etc/exports
   notify: restart nfs server
 
 - name: FILE | Create exports directories
-  file: >
-    path={{ item.path }}
-    owner={{ item.owner | default(omit) }}
-    group={{ item.group | default(omit) }}
-    mode={{ item.mode | default(omit) }}
-    state=directory
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    mode: "{{ item.mode | default(omit) }}"
+    state: directory
   with_items: "{{ nfs_exports }}"
   when: item.creates is not defined or item.creates
