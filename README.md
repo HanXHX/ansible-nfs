@@ -1,7 +1,7 @@
 NFS Ansible role
 ================
 
-Install and configure NFS client / server for Debian. It manages cache FS for client. Active support for Debian Jessie+, should work perfectly on other Debian-based systems (Ubuntu).
+Install and configure NFS client / server for Debian. It manages cache FS for client. Active support for Debian Jessie+Stretch, should work on other Debian-based systems (Ubuntu).
 
 Requirements
 ------------

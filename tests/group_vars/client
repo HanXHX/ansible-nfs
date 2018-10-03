@@ -3,5 +3,5 @@ nfs_client: true
 nfs_mounts:
   - localpath: '/srv/clientnfs1'
     remotepath: '/srv/nfs1'
-    remotehost: '192.168.201.20'
+    remotehost: '{{ _remotehost }}'
     options: 'noatime,noexec,_netdev,soft,timeo=600,retrans=1,rsize=2048,wsize=2048,fsc'
