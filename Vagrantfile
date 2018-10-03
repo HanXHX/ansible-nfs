@@ -7,7 +7,9 @@ Vagrant.configure("2") do |config|
 
 	vms = [
 		["jessie-server", "debian/jessie64", "192.168.201.20", ["jessie", "server"]],
-		["jessie-client", "debian/jessie64", "192.168.201.21", ["jessie","client"]]
+		["jessie-client", "debian/jessie64", "192.168.201.21", ["jessie","client"]],
+		["stretch-server", "debian/stretch64", "192.168.201.22", ["stretch", "server"]],
+		["stretch-client", "debian/stretch64", "192.168.201.23", ["stretch","client"]]
 	]
 
 	config.vm.provider "virtualbox" do |v|
@@ -26,7 +28,7 @@ Vagrant.configure("2") do |config|
 					vm[3][1] => vm[0],
 				}
 				ansible.verbose = 'vv'
-				ansible.sudo = true
+				ansible.become = true
 			end
 		end
 	end
