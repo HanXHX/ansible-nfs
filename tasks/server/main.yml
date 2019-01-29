@@ -18,5 +18,5 @@
     group: "{{ item.group | default(omit) }}"
     mode: "{{ item.mode | default(omit) }}"
     state: directory
-  with_items: "{{ nfs_exports }}"
+  loop: "{{ nfs_exports }}"
   when: item.creates is not defined or item.creates

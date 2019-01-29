@@ -2,14 +2,12 @@
 
 - hosts: all
   pre_tasks:
-    - apt:
-        pkg: "{{ item }}"
+    - name: APT | Install dev packages
+      apt:
+        pkg: ['strace', 'vim']
         state: present
         update_cache: yes
         cache_valid_time: 3600
-      with_items:
-        - strace
-        - vim
 
 - hosts: server
   roles:

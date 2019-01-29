@@ -1,17 +1,23 @@
 ---
 
 - name: APT | Install cachefilesd
-  apt: name=cachefilesd state=present
+  apt:
+    name: cachefilesd
 
 - name: LINEINFILE | Enable cachefilesd
-  lineinfile: dest=/etc/default/cachefilesd regexp='^#?RUN' line='RUN=yes'
+  lineinfile:
+    dest: /etc/default/cachefilesd
+    regexp: '^#?RUN'
+    linei: 'RUN=yes'
 
 - name: FILE | Create cache directory
-  file: >
-    path={{ nfs_cache_path }}
-    state=directory
-    owner=root
-    group=root
+  file:
+    path: '{{ nfs_cache_path }}'
+    state: directory
+    owner: root
+    group: root
 
 - name: SERVICE | Ensure cachefilesd is started
-  service: name=cachefilesd state=started
+  service:
+    name: cachefilesd
+    state: started
