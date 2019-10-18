@@ -8,7 +8,7 @@
   lineinfile:
     dest: /etc/default/cachefilesd
     regexp: '^#?RUN'
-    linei: 'RUN=yes'
+    line: 'RUN=yes'
 
 - name: FILE | Create cache directory
   file:
